@@ -1,24 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { Table, Container, Button } from 'react-bootstrap';
-import axios from 'axios'; // Directly using axios here
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Button, Container, Spinner, Table } from 'react-bootstrap';
 import DeleteProduct from './DeleteProduct';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
   const fetchProducts = async () => {
     try {
       const response = await axios.get('http://localhost:8000/api/products');
       setProducts(response.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
       alert('Failed to fetch products.');
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  if (loading) {
+    return (
+      <Container className="mt-5 text-center">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </Container>
+    );
+  }
 
   return (
     <Container className="mt-5">

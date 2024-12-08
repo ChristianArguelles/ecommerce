@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory;  // Ensure this trait is included
 
     protected $fillable = [
-        'name',
+        'barcode',
+        'description',
         'price',
-        'stocks',
+        'quantity',
+        'category',
     ];
 }

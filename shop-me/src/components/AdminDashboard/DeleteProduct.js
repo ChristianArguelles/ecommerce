@@ -1,6 +1,6 @@
+import axios from 'axios';
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import axios from 'axios'; // Directly using axios here
 
 const DeleteProduct = ({ id, refreshProducts }) => {
   const handleDelete = async () => {
